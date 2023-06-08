@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.ISpringTemplateEngine;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
@@ -18,15 +20,17 @@ import org.thymeleaf.templatemode.TemplateMode;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.hivetech"})
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private ApplicationContext applicationContext;
+
     @Bean
-    public ThymeleafViewResolver viewResolver(){
+    public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
+
     public SpringResourceTemplateResolver templateResolver() throws BeansException {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(this.applicationContext);
@@ -36,6 +40,7 @@ public class WebConfig {
         templateResolver.setCacheable(true);
         return templateResolver;
     }
+
     @Bean
     public ISpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -44,4 +49,9 @@ public class WebConfig {
         return templateEngine;
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
+    }
 }

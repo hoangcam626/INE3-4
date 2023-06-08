@@ -40,6 +40,13 @@
       <version>6.0.8</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>6.0.9</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring6 -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
@@ -58,7 +65,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>6.2.0.Final</version>
+      <version>6.2.2.Final</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
@@ -72,7 +79,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>6.0.0.Alpha7</version>
+      <version>5.6.15.Final</version>
       <type>pom</type>
     </dependency>
 
@@ -141,6 +148,27 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.12.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.15.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.15.0</version>
     </dependency>
 
   </dependencies>
