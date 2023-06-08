@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <div th:replace="fragment/header::header('Category')"></div>
+    <script type="text/javascript" src="/static/js/category.js"></script>
+</head>
+<body>
+<div th:replace="fragment/header::navbar"></div>
+<div class="container">
+    <br>
+    <h1>Create Category</h1> <br>
+    <a href="/categories" class="btn btn-primary">
+        <i class="fa fa-list-ul" aria-hidden="true"></i>
+        Category List
+    </a><br><br>
+    <form id="formCategory" th:action="@{/category}" th:object="${category}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="status">Status*</label>
+            <select class="form-control" id="status" name="status">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="showHomepage">Show Homepage*</label>
+            <select class="form-control" id="showHomepage" name="showHomepage">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <input id="btnAddCategory" type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+</div>
+<div th:replace="fragment/header::pop-up"></div>
+<div th:replace="fragment/footer::copy"></div>
+</body>
+</html>
