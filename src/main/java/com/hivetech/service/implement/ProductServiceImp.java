@@ -2,16 +2,16 @@ package com.hivetech.service.implement;
 
 import com.hivetech.dto.CreateProductDto;
 import com.hivetech.entity.Category;
-import com.hivetech.repository.CategoryRepository;
-import com.hivetech.repository.ProductRepository;
 import com.hivetech.entity.Product;
 import com.hivetech.exception.CustomException;
+import com.hivetech.repository.CategoryRepository;
+import com.hivetech.repository.ProductRepository;
 import com.hivetech.service.interfaces.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,13 +23,12 @@ import java.util.Optional;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImp implements ProductService {
     private final String UPLOADED_FOLDER = System.getProperty("user.home") + File.separator + "Downloads";
     private final String FILE_EXTENSION = ".jpg";
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public Product addProduct(CreateProductDto productDto) throws IOException {

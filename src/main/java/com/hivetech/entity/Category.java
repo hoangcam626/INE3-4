@@ -3,8 +3,8 @@ package com.hivetech.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor

@@ -2,11 +2,11 @@
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="fragment/header::header('Product')"></div>
-    <script type="text/javascript" src="/static/js/product.js"></script>
+    <div th:replace="~{fragment/header::header('Product')}"></div>
+    <script type="text/javascript" src="/js/product.js"></script>
 </head>
 <body>
-<div th:replace="fragment/header::navbar"></div>
+<div th:replace="~{fragment/header::navbar}"></div>
 <div class="container">
     <div class="title">
         <h1>Create Product</h1><br>
@@ -54,7 +54,7 @@
         <input id="btnAddProduct" type="submit" class="btn btn-primary" value="Submit"/>
     </form>
 </div>
-<div th:replace="fragment/header::pop-up"></div>
-<footer th:replace="fragment/footer::copy"></footer>
+<div th:replace="~{fragment/header::pop-up}"></div>
+<footer th:replace="~{fragment/footer::copy}"></footer>
 </body>
 </html>
