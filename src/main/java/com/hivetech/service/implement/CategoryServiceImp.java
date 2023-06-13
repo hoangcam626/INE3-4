@@ -4,15 +4,15 @@ import com.hivetech.entity.Category;
 import com.hivetech.exception.CustomException;
 import com.hivetech.repository.CategoryRepository;
 import com.hivetech.service.interfaces.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImp implements CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<Category> getCategories() {

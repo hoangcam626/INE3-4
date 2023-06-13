@@ -2,11 +2,11 @@
 <html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <div th:replace="fragment/header::header('Category')"></div>
-    <script type="text/javascript" src="/static/js/category.js"></script>
+    <div th:replace="~{fragment/header::header('Category')}"></div>
+    <script type="text/javascript" src="/js/category.js"></script>
 </head>
 <body>
-<div th:replace="fragment/header::navbar"></div>
+<div th:replace="~{fragment/header::navbar}"></div>
 <div class="container">
     <br>
     <h1>Create Category</h1> <br>
@@ -36,7 +36,7 @@
         <input id="btnAddCategory" type="submit" class="btn btn-primary" value="Submit"/>
     </form>
 </div>
-<div th:replace="fragment/header::pop-up"></div>
-<div th:replace="fragment/footer::copy"></div>
+<div th:replace="~{fragment/header::pop-up}"></div>
+<div th:replace="~{fragment/footer::copy}"></div>
 </body>
 </html>

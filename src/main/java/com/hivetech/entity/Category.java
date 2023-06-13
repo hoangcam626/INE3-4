@@ -3,8 +3,8 @@ package com.hivetech.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -23,6 +23,7 @@ public class Category {
     private String status;
     @Column(name = "showHomepage")
     private String showHomepage;
+    @Builder.Default
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 }
