@@ -23,6 +23,7 @@ public class Category {
     private String status;
     @Column(name = "showHomepage")
     private String showHomepage;
+    @Builder.Default
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 }
