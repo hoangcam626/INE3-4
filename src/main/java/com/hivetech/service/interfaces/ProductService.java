@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public interface ProductService {
@@ -15,4 +16,6 @@ public interface ProductService {
     Page<Product> getAllProducts(Integer pageNo, Integer pageSize);
 
     String saveUploadedFiles(MultipartFile file) throws IOException;
+
+    List<Product> searchProduct(String keyword, Long categoryId);
 }

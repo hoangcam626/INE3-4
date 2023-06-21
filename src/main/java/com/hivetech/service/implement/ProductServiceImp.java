@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -74,5 +76,21 @@ public class ProductServiceImp implements ProductService {
             return path.toString();
         }
         return null;
+    }
+
+    public List<Product> searchProduct(String keyword, Long categoryId){
+
+        Category category = categoryRepository.findByCategoryId(categoryId);
+        List<Product> products = productRepository.findByKeyword(keyword);
+        List<Product> searchProducts = new ArrayList<>();
+        searchProducts.addAll(products);
+        if (category !=null){
+            for(Product product : products){
+                if(product.getCategory() != category){
+                    searchProducts.remove(product);
+                }
+            }
+        }
+        return searchProducts;
     }
 }
