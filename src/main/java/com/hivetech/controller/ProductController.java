@@ -11,6 +11,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageInputStream;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -78,33 +83,38 @@ public class ProductController {
         return model;
     }
 
-    @PostMapping(value = "/api/v1/search-product")
+    @PostMapping(value = "/api/v1/public/search-product")
     public ResponseEntity getProduct(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "category", required = false) Long categoryId) {
         List<Product> products = productService.searchProduct(keyword, categoryId);
-        for(Product product:products){
+        for (Product product : products) {
             String url = MvcUriComponentsBuilder
-                    .fromMethodName(ProductController.class, "getImage", product.getThumbnailImage().replace("\\","/")).build().toString();
+                    .fromMethodName(ProductController.class, "getImage", product.getThumbnailImage().replace("\\", "/")).build().toString();
             product.setThumbnailImage(url);
         }
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @RequestMapping("/images")
-    public ResponseEntity<Resource> getImage(@RequestParam("thumbnailImage") String filename) throws URISyntaxException, IOException {
-        try {
-            Path path = Paths.get(filename);
-            Resource resource = new UrlResource(path.toUri());
-            if (resource.exists()) {
-                String contentType = "image/jpeg";
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_TYPE, contentType)
-                        .body(resource);
-            } else {
-                return ResponseEntity.notFound().build();
+    @RequestMapping("/api/v1/public/images")
+    public ResponseEntity<Resource> getImage(@RequestParam("thumbnailImage") String filename) throws IOException {
+        Path path = Paths.get(filename);
+        File imageFile = path.toFile();
+
+        if (imageFile.exists()) {
+            BufferedImage bufferedImage = ImageIO.read(imageFile);
+            MediaType mediaType = MediaType.IMAGE_JPEG;
+
+            if (bufferedImage != null) {
+                String formatName = ImageIO.getImageReaders(new FileImageInputStream(imageFile)).next().getFormatName();
+                mediaType = MediaType.valueOf("image/" + formatName.toLowerCase());
+
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).build();
+            Resource resource = new UrlResource(path.toUri());
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_TYPE, mediaType.toString())
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
         }
+
     }
 }

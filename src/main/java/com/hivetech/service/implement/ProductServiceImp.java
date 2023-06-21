@@ -78,17 +78,18 @@ public class ProductServiceImp implements ProductService {
         return null;
     }
 
-    public List<Product> searchProduct(String keyword, Long categoryId){
+    public List<Product> searchProduct(String keyword, Long categoryId) {
 
         Category category = categoryRepository.findByCategoryId(categoryId);
         List<Product> products = productRepository.findByKeyword(keyword);
         List<Product> searchProducts = new ArrayList<>();
-        searchProducts.addAll(products);
-        if (category !=null){
-            for(Product product : products){
-                if(product.getCategory() != category){
-                    searchProducts.remove(product);
-                }
+        if (category == null) {
+            searchProducts.addAll(products);
+            return searchProducts;
+        }
+        for (Product product : products) {
+            if (product.getCategory() == category) {
+                searchProducts.add(product);
             }
         }
         return searchProducts;
