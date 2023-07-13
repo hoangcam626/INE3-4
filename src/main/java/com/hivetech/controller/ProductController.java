@@ -102,4 +102,9 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/")
+    public String getHome(){
+        return "home";
+    }
 }
